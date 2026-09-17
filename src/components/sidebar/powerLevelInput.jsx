@@ -1,4 +1,4 @@
-import { useCharacterStore } from 'src/utilities/characterStore';
+import useCharacterStore from '@/utilities/characterStore';
 
 function PowerLevelInput() {
     const powerLevel = useCharacterStore((state) => state.powerLevel);

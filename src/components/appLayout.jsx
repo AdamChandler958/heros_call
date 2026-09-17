@@ -1,4 +1,4 @@
-import { Sidebar } from "./sidebar/sidebar";
+import Sidebar from "./sidebar/sidebar";
 
 function AppLayout({ children }) {
     return (

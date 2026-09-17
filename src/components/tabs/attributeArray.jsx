@@ -1,4 +1,4 @@
-import { AttributeTracker } from './attributeTracker';
+import AttributeTracker from './attributeTracker';
 
 const ATTRIBUTES = [
   { key: 'strength', label: 'Strength' },

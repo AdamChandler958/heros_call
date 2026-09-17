@@ -1,6 +1,6 @@
-import { BudgetTracker } from './budgetTracker';
-import { PowerLevelInput } from './powerLevelInput';
-import { CharacterMetaData } from './characterMetaData';
+import BudgetTracker from './budgetTracker';
+import PowerLevelInput from './powerLevelInput';
+import CharacterMetaData from './characterMetaData';
 
 function Sidebar() {
   return (

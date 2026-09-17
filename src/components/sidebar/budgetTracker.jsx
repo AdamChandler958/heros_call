@@ -1,9 +1,9 @@
-import { useCharacterStore } from 'src/utilities/characterStore';
+import useCharacterStore from '@/utilities/characterStore';
 
 function BudgetTracker() {
     // const powerLevel = useCharacterStore((state) => state.powerLevel);
-    const totalBudget = useCharacterStore((state) => state.getTotalBudget());
-    const spentPoints = useCharacterStore((state) => state.getSpentPoints);
+    const totalBudget = useCharacterStore((state) => state.getTotalPoints());
+    const spentPoints = useCharacterStore((state) => state.getSpentPoints());
 
     const remainingPoints = totalBudget - spentPoints;
     const isOverBudget = remainingPoints < 0;
