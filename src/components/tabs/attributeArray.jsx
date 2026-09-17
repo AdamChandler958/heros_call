@@ -1,4 +1,5 @@
 import AttributeTracker from './attributeTracker';
+import '@/style/AttributeArray.css'
 
 const ATTRIBUTES = [
   { key: 'strength', label: 'Strength' },

@@ -2,6 +2,7 @@ import './App.css'
 import { useState } from 'react';
 import AppLayout from './components/appLayout';
 import AttributeArray from './components/tabs/attributeArray';
+import '@/style/TabNav.css'
 
 // Placeholders
 function SkillsTab() { return <div>Skills Content</div>; }

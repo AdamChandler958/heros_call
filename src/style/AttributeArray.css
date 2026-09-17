@@ -1,0 +1,62 @@
+.attribute-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.attribute-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 240px));
+  gap: 1.25rem;
+  justify-content: start;
+}
+
+.attribute-card {
+  background-color: #2a2a32;
+  border: 1px solid #3a3a46;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.attribute-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.attribute-card .controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.attribute-card .controls button {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: none;
+  background-color: #4f46e5;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.attribute-card .controls button:hover {
+  background-color: #4338ca;
+}
+
+.attribute-card .score {
+  font-size: 1.25rem;
+  font-weight: bold;
+  min-width: 24px;
+  text-align: center;
+}
+
+.attribute-card .cost {
+  font-size: 0.85rem;
+  color: #a1a1aa;
+}

@@ -7,7 +7,6 @@ function Sidebar() {
     <aside className="builder-sidebar">
       <h2>Character Overview</h2>
       <BudgetTracker />
-      <hr />
       <PowerLevelInput />
       <CharacterMetaData />
     </aside>
