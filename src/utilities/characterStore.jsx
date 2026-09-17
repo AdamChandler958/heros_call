@@ -20,13 +20,13 @@ const useCharacterStore = create((set, get) => ({
 
     setPowerLevel: (newPL) => set({ powerLevel: newPL}),
 
-    incrementAttribute: (attr) =>
-        set((state => ({
-            attributes: {
-                ...state.attributes,
-                [attr]: state.attributes[attr]+1,
-            },
-        }))),
+    setAttribute: (attrKey, value) =>
+    set((state) => ({
+      attributes: {
+        ...state.attributes,
+        [attrKey]: Math.max(-5, value),
+      },
+    })),
 
     getTotalPoints: () => get().powerLevel * 15,
 
