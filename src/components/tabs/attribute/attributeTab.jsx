@@ -5,7 +5,6 @@ export function AttributeTab() {
     return (
         <div>
             <AttributeArray />
-            <hr/>
             <DefenseArray />
         </div>      
     );

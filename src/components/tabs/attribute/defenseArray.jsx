@@ -1,5 +1,6 @@
 
 import { useCharacterStore, calculateTotals} from "@/utilities/characterStore";
+import '@/style/DefenseArray.css'
 
 const DEFENSE_CONFIG = [
   { key: "dodge", label: "Dodge", baseAttr: "agility" },
