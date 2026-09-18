@@ -1,4 +1,5 @@
 import { useCharacterStore, getSkillPointsSpent } from '@/utilities/characterStore';
+import '@/style/SkillsTab.css'
 
 const SKILL_LIST = [
   { key: 'acrobatics', name: 'Acrobatics', attr: 'agility' },
