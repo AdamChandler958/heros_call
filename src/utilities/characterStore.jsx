@@ -72,13 +72,52 @@ export const useCharacterStore = create(
                 },
         })),
 
+        advantages: [], 
+
+        addAdvantage: (advantage) =>
+        set((state) => ({
+            advantages: [
+            ...state.advantages,
+            {
+                id: crypto.randomUUID(),
+                key: advantage.key,
+                name: advantage.name,
+                rank: 1,
+                maxRank: advantage.maxRank || null,
+                details: advantage.hasDetails ? '' : null,
+            },
+            ],
+        })),
+
+        updateAdvantageRank: (id, delta) =>
+        set((state) => ({
+            advantages: state.advantages.map((adv) => {
+            if (adv.id !== id) return adv;
+            const newRank = Math.max(1, adv.rank + delta);
+            if (adv.maxRank && newRank > adv.maxRank) return adv;
+            return { ...adv, rank: newRank };
+            }),
+        })),
+
+        updateAdvantageDetails: (id, details) =>
+        set((state) => ({
+            advantages: state.advantages.map((adv) =>
+            adv.id === id ? { ...adv, details } : adv
+            ),
+        })),
+
+        removeAdvantage: (id) =>
+        set((state) => ({
+            advantages: state.advantages.filter((adv) => adv.id !== id),
+        })),
+
         getTotalPoints: () => get().powerLevel * 15,
 
         getSpentPoints: () => {
-            const { attributes, boughtDefenses, skills} = get();
+            const { attributes, boughtDefenses, skills, advantages} = get();
             const attrPoints = Object.values(attributes).reduce((sum, val) => sum + val * 2, 0);
             const defensePoints = Object.values(boughtDefenses).reduce((sum, rank) => sum + rank, 0);
-            return attrPoints + defensePoints + getSkillPointsSpent(skills);
+            return attrPoints + defensePoints + getSkillPointsSpent(skills) + getAdvantagePointsSpent(advantages);
         },
         resetCharacter: () =>
             set({
@@ -109,4 +148,8 @@ export function calculateTotals(attributes, boughtDefenses) {
 export function getSkillPointsSpent(skills) {
     const totalRanks = Object.values(skills).reduce((sum, r) => sum + r, 0);
     return Math.ceil(totalRanks / 2);
+}
+
+export function getAdvantagePointsSpent(advantages) {
+  return advantages.reduce((sum, adv) => sum + adv.rank, 0);
 }
