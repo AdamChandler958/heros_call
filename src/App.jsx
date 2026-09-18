@@ -1,7 +1,7 @@
 import './App.css'
 import { useState } from 'react';
 import AppLayout from './components/appLayout';
-import AttributeArray from './components/tabs/attributeArray';
+import { AttributeTab } from './components/tabs/attribute/attributeTab';
 import '@/style/TabNav.css'
 
 // Placeholders
@@ -35,7 +35,7 @@ function App() {
       </nav>
 
       <div className="tab-content">
-        {activeTab === 'attributes' && <AttributeArray />}
+        {activeTab === 'attributes' && <AttributeTab />}
         {activeTab === 'skills' && <SkillsTab />}
         {activeTab === 'powers' && <PowersTab />}
       </div>

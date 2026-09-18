@@ -1,4 +1,4 @@
-import useCharacterStore from '@/utilities/characterStore';
+import { useCharacterStore }from '@/utilities/characterStore';
 
 function CharacterMetaData() {
     const name = useCharacterStore((state) => state.name);
