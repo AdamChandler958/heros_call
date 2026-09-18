@@ -1,83 +1,100 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export const useCharacterStore = create((set, get) => ({
-    name: "",
-    alias: '',
-    descriptors: '',
-    powerLevel: 10,
-    attributes: {
-        strength: 0, 
-        stamina: 0, 
-        agility: 0, 
-        dexterity: 0,
-        fighting: 0, 
-        intellect: 0, 
-        awareness: 0, 
-        presence: 0,
-    },
-    boughtDefenses: {
-        dodge: 0,
-        parry: 0,
-        fortitude: 0,
-        will: 0,
-        toughness: 0
-    },
-    skills: {
-        acrobatics: 0,
-        athletics: 0,
-        closeCombat: 0,
-        deception: 0,
-        expertise: 0,
-        insight: 0,
-        intimidation: 0,
-        investigation: 0,
-        perception: 0,
-        persuasion: 0,
-        rangedCombat: 0,
-        sleightOfHand: 0,
-        stealth: 0,
-        technology: 0,
-        treatment: 0,
-        vehicles: 0,
-    },
+export const useCharacterStore = create(
+    persist(
+        (set, get) => ({
+        name: "",
+        alias: '',
+        descriptors: '',
+        powerLevel: 10,
+        attributes: {
+            strength: 0, 
+            stamina: 0, 
+            agility: 0, 
+            dexterity: 0,
+            fighting: 0, 
+            intellect: 0, 
+            awareness: 0, 
+            presence: 0,
+        },
+        boughtDefenses: {
+            dodge: 0,
+            parry: 0,
+            fortitude: 0,
+            will: 0,
+            toughness: 0
+        },
+        skills: {
+            acrobatics: 0,
+            athletics: 0,
+            closeCombat: 0,
+            deception: 0,
+            expertise: 0,
+            insight: 0,
+            intimidation: 0,
+            investigation: 0,
+            perception: 0,
+            persuasion: 0,
+            rangedCombat: 0,
+            sleightOfHand: 0,
+            stealth: 0,
+            technology: 0,
+            treatment: 0,
+            vehicles: 0,
+        },
 
-    setField: (field, value) => set({ [field]: value }),
+        setField: (field, value) => set({ [field]: value }),
 
-    setPowerLevel: (newPL) => set({ powerLevel: newPL}),
+        setPowerLevel: (newPL) => set({ powerLevel: newPL}),
 
-    setAttribute: (attrKey, value) =>
-        set((state) => ({
-            attributes: {
-                ...state.attributes,
-                [attrKey]: Math.max(-5, value),
-            },
+        setAttribute: (attrKey, value) =>
+            set((state) => ({
+                attributes: {
+                    ...state.attributes,
+                    [attrKey]: Math.max(-5, value),
+                },
+            })),
+
+        setDefenseRank: (defenseKey, value) => 
+            set((state) => ({
+                boughtDefenses: {
+                    ...state.boughtDefenses,
+                    [defenseKey]: Math.max(0, value)
+                },
+            })),
+
+        setSkillRank: (skillKey, rank) =>
+            set((state) => ({
+                skills: {
+                    ...state.skills,
+                    [skillKey]: Math.max(0, rank),
+                },
         })),
 
-    setDefenseRank: (defenseKey, value) => 
-        set((state) => ({
-            boughtDefenses: {
-                ...state.boughtDefenses,
-                [defenseKey]: Math.max(0, value)
-            },
-        })),
+        getTotalPoints: () => get().powerLevel * 15,
 
-    setSkillRank: (skillKey, rank) =>
-        set((state) => ({
-            skills: {
-                ...state.skills,
-                [skillKey]: Math.max(0, rank),
-            },
-     })),
-
-    getTotalPoints: () => get().powerLevel * 15,
-
-    getSpentPoints: () => {
-        const { attributes, boughtDefenses, skills} = get();
-        const attrPoints = Object.values(attributes).reduce((sum, val) => sum + val * 2, 0);
-        const defensePoints = Object.values(boughtDefenses).reduce((sum, rank) => sum + rank, 0);
-        return attrPoints + defensePoints + getSkillPointsSpent(skills);
-    },
-}))
+        getSpentPoints: () => {
+            const { attributes, boughtDefenses, skills} = get();
+            const attrPoints = Object.values(attributes).reduce((sum, val) => sum + val * 2, 0);
+            const defensePoints = Object.values(boughtDefenses).reduce((sum, rank) => sum + rank, 0);
+            return attrPoints + defensePoints + getSkillPointsSpent(skills);
+        },
+        resetCharacter: () =>
+            set({
+            name: '',
+            alias: '',
+            descriptors: '',
+            powerLevel: 10,
+            attributes: { strength: 0, stamina: 0, agility: 0, dexterity: 0, fighting: 0, intellect: 0, awareness: 0, presence: 0 },
+            boughtDefenses: { dodge: 0, parry: 0, fortitude: 0, will: 0, toughness: 0 },
+            skills: Object.keys(get().skills).reduce((acc, k) => ({ ...acc, [k]: 0 }), {}),
+        }),
+    }),
+    {
+        name: 'mm3e-character-sheet'
+    }
+))
 
 export function calculateTotals(attributes, boughtDefenses) {
         return {
