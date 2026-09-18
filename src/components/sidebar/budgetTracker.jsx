@@ -1,4 +1,4 @@
-import useCharacterStore from '@/utilities/characterStore';
+import { useCharacterStore } from '@/utilities/characterStore';
 
 function BudgetTracker() {
     // const powerLevel = useCharacterStore((state) => state.powerLevel);

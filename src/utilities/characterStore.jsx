@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useCharacterStore = create((set, get) => ({
+export const useCharacterStore = create((set, get) => ({
     name: "",
     alias: '',
     descriptors: '',
@@ -15,6 +15,13 @@ const useCharacterStore = create((set, get) => ({
         awareness: 0, 
         presence: 0,
   },
+    boughtDefenses: {
+        dodge: 0,
+        parry: 0,
+        fortitude: 0,
+        will: 0,
+        toughness: 0
+    },
 
     setField: (field, value) => set({ [field]: value }),
 
@@ -28,13 +35,30 @@ const useCharacterStore = create((set, get) => ({
       },
     })),
 
+    setDefenseRank: (defenseKey, value) => 
+        set((state) => ({
+            boughtDefenses: {
+                ...state.boughtDefenses,
+                [defenseKey]: Math.max(0, value)
+            },
+        })),
+
     getTotalPoints: () => get().powerLevel * 15,
 
     getSpentPoints: () => {
-    const { attributes } = get();
-    const attrPoints = Object.values(attributes).reduce((sum, val) => sum + val * 2, 0);
-    return attrPoints;
-  },
-}));
+        const { attributes, boughtDefenses} = get();
+        const attrPoints = Object.values(attributes).reduce((sum, val) => sum + val * 2, 0);
+        const defensePoints = Object.values(boughtDefenses).reduce((sum, rank) => sum + rank, 0);
+        return attrPoints + defensePoints;
+    },
+}))
 
-export default useCharacterStore
+export function calculateTotals(attributes, boughtDefenses) {
+        return {
+            dodge: attributes.agility + boughtDefenses.dodge,
+            parry: attributes.fighting + boughtDefenses.parry,
+            toughness: attributes.stamina + boughtDefenses.toughness,
+            fortitude: attributes.stamina + boughtDefenses.fortitude,
+            will: attributes.awareness + boughtDefenses.will,
+        };
+}

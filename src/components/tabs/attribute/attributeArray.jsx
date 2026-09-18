@@ -12,7 +12,7 @@ const ATTRIBUTES = [
   { key: 'presence', label: 'Presence' },
 ];
 
-function AttributeArray() {
+export function AttributeArray() {
   return (
     <section className="attribute-section">
       <h2>Attributes</h2>
@@ -28,5 +28,3 @@ function AttributeArray() {
     </section>
   );
 };
-
-export default AttributeArray
