@@ -1,6 +1,5 @@
-
-import { useCharacterStore, calculateTotals} from "@/utilities/characterStore";
-import '@/style/DefenseArray.css'
+import { useCharacterStore, calculateTotals } from "@/utilities/characterStore";
+import "@/style/DefenseArray.css";
 
 const DEFENSE_CONFIG = [
   { key: "dodge", label: "Dodge", baseAttr: "agility" },
@@ -22,17 +21,17 @@ export function DefenseArray() {
 
   if (totals.dodge + totals.toughness > maxCombined) {
     warnings.push(
-      `Dodge (${totals.dodge}) + Toughness (${totals.toughness}) exceeds PL ${powerLevel} cap of ${maxCombined}.`
+      `Dodge (${totals.dodge}) + Toughness (${totals.toughness}) exceeds PL ${powerLevel} cap of ${maxCombined}.`,
     );
   }
   if (totals.parry + totals.toughness > maxCombined) {
     warnings.push(
-      `Parry (${totals.parry}) + Toughness (${totals.toughness}) exceeds PL ${powerLevel} cap of ${maxCombined}.`
+      `Parry (${totals.parry}) + Toughness (${totals.toughness}) exceeds PL ${powerLevel} cap of ${maxCombined}.`,
     );
   }
   if (totals.fortitude + totals.will > maxCombined) {
     warnings.push(
-      `Fortitude (${totals.fortitude}) + Will (${totals.will}) exceeds PL ${powerLevel} cap of ${maxCombined}.`
+      `Fortitude (${totals.fortitude}) + Will (${totals.will}) exceeds PL ${powerLevel} cap of ${maxCombined}.`,
     );
   }
 

@@ -1,4 +1,4 @@
-import { useCharacterStore } from '@/utilities/characterStore';
+import { useCharacterStore } from "@/utilities/characterStore";
 
 function AttributeTracker({ name, attrKey }) {
   const score = useCharacterStore((state) => state.attributes[attrKey]);
@@ -17,6 +17,6 @@ function AttributeTracker({ name, attrKey }) {
       <span className="cost">{cost} PP</span>
     </div>
   );
-};
+}
 
-export default AttributeTracker
+export default AttributeTracker;
