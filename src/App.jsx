@@ -2,10 +2,10 @@ import './App.css'
 import { useState } from 'react';
 import AppLayout from './components/appLayout';
 import { AttributeTab } from './components/tabs/attribute/attributeTab';
+import { SkillsTab } from './components/tabs/skill/skillsTab';
 import '@/style/TabNav.css'
 
 // Placeholders
-function SkillsTab() { return <div>Skills Content</div>; }
 function PowersTab() { return <div>Powers Content</div>; }
 
 function App() {
