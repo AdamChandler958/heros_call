@@ -4,7 +4,7 @@ import {
   getAdvantagePointsSpent,
 } from "@/utilities/characterStore";
 import { AVAILABLE_ADVANTAGES } from "@/utilities/advantagesData";
-//import "@/styles/AdvantagesTab.css";
+import "@/style/AdvantagesTab.css";
 
 export function AdvantagesTab() {
   const advantages = useCharacterStore((state) => state.advantages);
